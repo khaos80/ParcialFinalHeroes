@@ -174,7 +174,7 @@ export class PersonajesService {
     {
       nombre: 'Loki',
       alias: 'Loki Laufeyson',
-      imagen: '',
+      imagen: 'assets/personajes/loki.jpg',
       descripcion: 'El dios de las mentiras y el engaño, hermano adoptivo de Thor.',
       tipo: 'Villano',
       universo: 'Marvel',
@@ -182,7 +182,7 @@ export class PersonajesService {
     {
       nombre: 'Thanos',
       alias: 'Thanos',
-      imagen: '',
+      imagen: 'assets/personajes/thanos.jpg',
       descripcion: 'Un titán loco obsesionado con el equilibrio universal, conocido por reunir las Gemas del Infinito.',
       tipo: 'Villano',
       universo: 'Marvel',
@@ -190,7 +190,7 @@ export class PersonajesService {
     {
       nombre: 'Green Goblin',
       alias: 'Norman Osborn',
-      imagen: '',
+      imagen: 'assets/personajes/greengoblin.jpg',
       descripcion: 'Un empresario loco y archienemigo de Spider-Man.',
       tipo: 'Villano',
       universo: 'Marvel',
@@ -198,7 +198,7 @@ export class PersonajesService {
     {
       nombre: 'Doctor Octopus',
       alias: 'Otto Octavius',
-      imagen: '',
+      imagen: 'assets/personajes/doctoroctopus.jpg',
       descripcion: 'Un científico con brazos mecánicos que se convierte en un enemigo de Spider -Man.',
       tipo: 'Villano',
       universo: 'Marvel',
@@ -206,7 +206,7 @@ export class PersonajesService {
     {
       nombre: 'Magneto',
       alias: 'Erik Lehnsherr',
-      imagen: '',
+      imagen: 'assets/personajes/magneto.jpg',
       descripcion: 'Un mutante con la capacidad de controlar el magnetismo y líder de los Hermanos Mutantes.',
       tipo: 'Villano',
       universo: 'Marvel',
@@ -214,7 +214,7 @@ export class PersonajesService {
     {
       nombre: 'Red Skull',
       alias: 'Johann Schmidt',
-      imagen: '',
+      imagen: 'assets/personajes/redskull.jpg',
       descripcion: 'Un líder nazi y archienemigo del Capitán América.',
       tipo: 'Villano',
       universo: 'Marvel',
@@ -222,7 +222,7 @@ export class PersonajesService {
     {
       nombre: 'Ultron',
       alias: 'Ultron',
-      imagen: '',
+      imagen: 'assets/personajes/ultron.jpg',
       descripcion: 'Una inteligencia artificial malvada creada por Tony Stark que busca la destrucción de la humanidad.',
       tipo: 'Villano',
       universo: 'Marvel',
@@ -230,7 +230,7 @@ export class PersonajesService {
     {
       nombre: 'Kingpin',
       alias: 'Wilson Fisk',
-      imagen: '',
+      imagen: 'assets/personajes/kingpin.jpg',
       descripcion: 'Un poderoso criminal y archienemigo de Daredevil.',
       tipo: 'Villano',
       universo: 'Marvel',
@@ -238,7 +238,7 @@ export class PersonajesService {
     {
       nombre: 'Mistério',
       alias: 'Quentin Beck',
-      imagen: '',
+      imagen: 'assets/personajes/misterio.jpg',
       descripcion: 'Un maestro de las ilusiones y enemigo de Spider-Man.',
       tipo: 'Villano',
       universo: 'Marvel',
