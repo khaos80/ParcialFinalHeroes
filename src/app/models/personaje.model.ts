@@ -3,6 +3,6 @@ export interface Personaje {
     alias: string;
     imagen: string;
     descripcion: string;
-    tipo: 'Heroe' | 'AntiHeroe' | 'Villano';
+    afiliacion: 'Heroe' | 'AntiHeroe' | 'Villano';
     universo: 'Marvel' | 'DC' | 'Otro';
 }

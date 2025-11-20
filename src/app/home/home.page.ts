@@ -26,7 +26,6 @@ import { NgFor } from '@angular/common';
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [
-    IonCardSubtitle,
     IonHeader,
     NgFor,
     IonTitle,
@@ -40,7 +39,6 @@ import { NgFor } from '@angular/common';
     IonInfiniteScroll,
     IonInfiniteScrollContent,
     IonList,
-    TitleCasePipe
   ],
 })
 export class Homepage implements OnInit {
@@ -98,7 +96,8 @@ export class Homepage implements OnInit {
 
     this.personajesFiltrados = this.personajes.filter(p =>
       p.nombre.toLowerCase().includes(texto) ||
-      p.tipo.toLowerCase().includes(texto) ||
+      p.alias.toLowerCase().includes(texto) ||
+      p.afiliacion.toLowerCase().includes(texto) ||
       p.universo.toLowerCase().includes(texto)
     );
   }
