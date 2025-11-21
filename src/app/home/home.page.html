@@ -1,4 +1,5 @@
 <ion-header>
+
   <ion-toolbar>
     <ion-title>Personajes</ion-title>
   </ion-toolbar>
@@ -8,16 +9,41 @@
       placeholder="Buscar personaje..."
       (ionInput)="buscar($event)">
     </ion-searchbar>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="abrirSelectFiltros()">
+        <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
+
+  <ion-item style="display: none;">
+    <ion-select #selectFiltros placeholder="Filtros" interface="popover" (ionChange)="aplicarFiltro($event)">
+      <!-- Filtro por Universo -->
+      <ion-select-option value="universo:Marvel">Universo: Marvel</ion-select-option>
+      <ion-select-option value="universo:DC">Universo: DC</ion-select-option>
+
+      <!-- Filtro por Afiliación -->
+      <ion-select-option value="afiliacion:Heroe">Afiliación: Heroe</ion-select-option>
+      <ion-select-option value="afiliacion:AntiHeroe">Afiliación: Antiheroe</ion-select-option>
+      <ion-select-option value="afiliacion:Villano">Afiliación: Villano</ion-select-option>
+
+      <!-- Filtro Orden por Nombre -->
+      <ion-select-option value="orden:A-Z">Ordenar A → Z</ion-select-option>
+      <ion-select-option value="orden:Z-A">Ordenar Z → A</ion-select-option>
+     
+      <!-- Quitar filtros -->
+      <ion-select-option value="Limpiar">Limpiar filtros</ion-select-option>
+</ion-select>
+  </ion-item>
+
 </ion-header>
 
 <ion-content>
 
   <ion-list>
     <ion-card *ngFor="let p of personajesFiltrados">
-      
       <img [src]="p.imagen" alt="{{ p.nombre }}" />
-
       <ion-card-header>
         <ion-card-title>{{ p.nombre }}</ion-card-title>
       </ion-card-header>

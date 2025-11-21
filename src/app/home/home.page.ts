@@ -1,23 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Personaje } from '../models/personaje.model';
 import { PersonajesService } from '../services/personajes';
-import { TitleCasePipe } from '@angular/common';
-import {
-  InfiniteScrollCustomEvent,
-  IonTitle,
-  IonToolbar,
-  IonSearchbar,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonContent,
-  IonInfiniteScroll,
-  IonInfiniteScrollContent,
-  IonList,
-  IonHeader,
-  IonCardSubtitle
-} from '@ionic/angular/standalone';
+import { ViewChild } from '@angular/core';
+import { IonSelect, IonSelectOption, IonItem } from '@ionic/angular/standalone';
+import { InfiniteScrollCustomEvent, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonCardSubtitle, IonButtons, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -25,22 +11,9 @@ import { NgFor } from '@angular/common';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [
-    IonHeader,
-    NgFor,
-    IonTitle,
-    IonToolbar,
-    IonSearchbar,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
-    IonContent,
-    IonInfiniteScroll,
-    IonInfiniteScrollContent,
-    IonList,
-  ],
+  imports: [IonItem, NgFor, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonButtons, IonButton, IonIcon, IonSelect, IonSelectOption ],
 })
+
 export class Homepage implements OnInit {
 
   personajes: Personaje[] = [];
@@ -59,6 +32,7 @@ export class Homepage implements OnInit {
     this.loadMore();
   }
 
+  // Función para cargar más personajes
   loadMore(event?: any) {
     const start = this.index;
     const end = this.index + this.batchSize;
@@ -79,10 +53,12 @@ export class Homepage implements OnInit {
     }
   }
 
+  // Manejador del evento de scroll infinito
   onIonInfinite(event: InfiniteScrollCustomEvent) {
     this.loadMore(event);
   }
 
+  // Función de búsqueda
   buscar(event: any) {
     const texto = event.target.value.toLowerCase();
 
@@ -102,4 +78,73 @@ export class Homepage implements OnInit {
     );
   }
 
+  // Referencia al IonSelect
+  @ViewChild('selectFiltros', { static: false }) selectFiltros!: IonSelect;
+
+  // Filtro seleccionado
+  filtroUniverso: string = '';
+  filtroAfiliacion: string = '';
+  ordenNombre: 'A-Z' | 'Z-A' | '' = '';
+  
+  // Función para abrir el IonSelect
+  abrirSelectFiltros() {
+    this.selectFiltros.open();
+  }
+
+  // Función para aplicar filtros y ordenamiento
+  aplicarFiltro(event: any) {
+    const valor = event.detail.value;
+
+    if (valor === 'Limpiar') {
+      this.filtroUniverso = '';
+      this.filtroAfiliacion = '';
+      this.ordenNombre = '';
+      this.aplicarFiltros();
+      return;
+    }
+
+    const [tipo, dato] = valor.split(':');
+
+    switch (tipo) {
+      case 'universo':
+        this.filtroUniverso = dato;
+        break;
+      case 'afiliacion':
+        this.filtroAfiliacion = dato;
+        break;
+      case 'orden':
+        this.ordenNombre = dato as 'A-Z' | 'Z-A';
+        break;
+    }
+
+    this.aplicarFiltros();
+  }
+  
+  // Función para aplicar los filtros y ordenamientos
+  aplicarFiltros() {
+    let filtrados = [...this.personajes];
+
+    if (this.filtroUniverso) {
+      filtrados = filtrados.filter(p => p.universo.toLowerCase() === this.filtroUniverso.toLowerCase());
+    }
+
+    if (this.filtroAfiliacion) {
+
+      const af = this.filtroAfiliacion.toLowerCase().replace(/[- ]/g, '');
+      filtrados = filtrados.filter(p => {
+        const afiliacionPersonaje = p.afiliacion.toLowerCase().replace(/[- ]/g, '');
+        return afiliacionPersonaje === af;
+      });
+    }
+
+    if (this.ordenNombre === 'A-Z') {
+      filtrados = [...filtrados].sort((a, b) => a.nombre.localeCompare(b.nombre));
+    }
+
+    if (this.ordenNombre === 'Z-A') {
+      filtrados = [...filtrados].sort((a, b) => b.nombre.localeCompare(a.nombre));
+    }
+
+    this.personajesFiltrados = filtrados;
+  }
 }
