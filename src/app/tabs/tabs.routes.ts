@@ -12,11 +12,6 @@ export const routes: Routes = [
           import('../home/home.page').then(m => m.Homepage),
       },
       {
-        path: 'explorar',
-        loadComponent: () =>
-          import('../pages/explorar/explorar.page').then(m => m.ExplorarPage),
-      },
-      {
         path: 'favoritos',
         loadComponent: () =>
           import('../pages/favoritos/favoritos.page').then(m => m.FavoritosPage),
