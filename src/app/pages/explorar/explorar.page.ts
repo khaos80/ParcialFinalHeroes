@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-explorar',
@@ -12,8 +13,10 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
 })
 export class ExplorarPage implements OnInit {
 
-  constructor() { }
-
+  constructor(private lang: LanguageService) { }
+   t(key: string) {
+    return this.lang.t(key);
+  }
   ngOnInit() {
   }
 

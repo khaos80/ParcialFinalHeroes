@@ -5,6 +5,7 @@ import { ViewChild } from '@angular/core';
 import { IonSelect, IonSelectOption, IonItem } from '@ionic/angular/standalone';
 import { InfiniteScrollCustomEvent, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonCardSubtitle, IonButtons, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { NgFor } from '@angular/common';
+import { LanguageService } from '.././services/language.service';
 
 @Component({
   selector: 'app-home',
@@ -22,8 +23,11 @@ export class Homepage implements OnInit {
   private index: number = 0;
   private batchSize: number = 15;
 
-  constructor(private personajesService: PersonajesService) {}
-
+  constructor(private personajesService: PersonajesService, private lang: LanguageService) {}
+  
+  t(key: string) {
+    return this.lang.t(key);
+  }
   ngOnInit() {
     // Cargar personajes desde el servicio
     this.personajes = this.personajesService.getPersonajes();
