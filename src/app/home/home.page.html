@@ -7,12 +7,14 @@
   <ion-toolbar>
     <ion-searchbar
       [placeholder]="t('HOME.SEARCH_PLACEHOLDER')"
+      [attr.aria-label]="t('HOME.SEARCH_PLACEHOLDER')"
+      debounce="300"
       (ionInput)="buscar($event)">
     </ion-searchbar>
 
     <ion-buttons slot="end">
       <ion-button (click)="abrirSelectFiltros()">
-        <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="filter-outline" aria-hidden="true"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -42,7 +44,7 @@
 
   <ion-list>
     <ion-card *ngFor="let p of personajesFiltrados">
-      <img [src]="p.imagen" alt="{{ p.nombre }}" />
+      <img [src]="p.imagen" alt="{{ p.nombre }}" loading="lazy"/>
       <ion-card-header>
         <ion-card-title>{{ p.nombre }}</ion-card-title>
       </ion-card-header>
@@ -62,7 +64,8 @@
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
     <ion-infinite-scroll-content
       loadingSpinner="crescent"
-      [loadingText]="t('HOME.LOADING')">
+      [loadingText]="t('HOME.LOADING')"
+      [attr.aria-label]="t('HOME.LOADING')">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
