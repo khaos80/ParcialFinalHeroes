@@ -34,4 +34,31 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+@import '@ionic/angular/css/palettes/dark.class.css';
+
+ion-item {
+  --transition: none;
+}
+
+body.font-small {
+  font-size: 12px;
+}
+
+body.font-medium {
+  font-size: 16px;
+}
+
+body.font-large {
+  font-size: 20px;
+}
+
+
+body.font-small ion-title,
+body.font-small ion-label {
+  font-size: 14px;
+}
+
+body.font-large ion-title,
+body.font-large ion-label {
+  font-size: 22px;
+}
