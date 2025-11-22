@@ -29,6 +29,7 @@
     "FILTER_CLEAR": "Limpiar filtros",
     "TYPE": "Tipo",
     "UNIVERSE": "Universo",
+    "LABEL": "Etiquetas",
     "LOADING": "Cargando más personajes..."
   }
 }

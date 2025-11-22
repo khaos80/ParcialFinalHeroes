@@ -28,6 +28,7 @@
     "FILTER_CLEAR": "Clear filters",
     "TYPE": "Type",
     "UNIVERSE": "Universe",
+    "LABEL": "Label",
     "LOADING": "Loading more characters..."
   }
 }
