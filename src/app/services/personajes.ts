@@ -14,6 +14,7 @@ export class PersonajesService {
       descripcion: 'Un joven con habilidades arácnidas que lucha contra el crimen en Nueva York.',
       afiliacion: 'Heroe',
       universo: 'Marvel',
+      etiquetas: ['Callejero', 'Agilidad', 'Estratega', 'Humano', 'Vigilante']
     },
     {
       nombre: 'Iron Man',
@@ -22,6 +23,7 @@ export class PersonajesService {
       descripcion: 'Un genio multimillonario que utiliza una armadura avanzada para combatir el mal.',
       afiliacion: 'Heroe',
       universo: 'Marvel',
+      etiquetas: ['Lider', 'Tecnologico', 'Estratega', 'Humano', 'Armadura avanzada']
     },
     {
       nombre: 'Thor',
@@ -30,6 +32,7 @@ export class PersonajesService {
       descripcion: 'El dios del trueno de Asgard, que protege la Tierra con su poderoso martillo Mjolnir.',
       afiliacion: 'Heroe',
       universo: 'Marvel',
+      etiquetas: ['Cosmico', 'Superfuerza', 'Agilidad', 'Dios', 'Impulsivo', 'Oscuro']
     },
     {
       nombre: 'Captain America',
@@ -38,6 +41,7 @@ export class PersonajesService {
       descripcion: 'Un super soldado que lucha por la justicia y la libertad durante la Segunda Guerra Mundial.',
       afiliacion: 'Heroe',
       universo: 'Marvel',
+      etiquetas: ['Lider', 'Superfuerza', 'Agilidad', 'Estratega', 'Humano']
     },
     {
       nombre: 'Hulk',
@@ -46,6 +50,7 @@ export class PersonajesService {
       descripcion: 'Un científico que se transforma en un gigante verde y poderoso cuando se enfurece.',
       afiliacion: 'Heroe',
       universo: 'Marvel',
+      etiquetas: ['Mutante', 'Superfuerza', 'Humano', 'Impulsivo']
     },
     {
       nombre: 'Black Widow',
@@ -54,6 +59,7 @@ export class PersonajesService {
       descripcion: 'Una espía y experta en artes marciales que trabaja para S.H.I.E.L.D.',
       afiliacion: 'Heroe',
       universo: 'Marvel',
+      etiquetas: ['Callejero', 'Velocista', 'Agilidad', 'Estratega', 'Humano', ]
     },
     {
       nombre: 'Hawkeye',
@@ -62,6 +68,7 @@ export class PersonajesService {
       descripcion: 'Un arquero excepcionalmente hábil y miembro de los Vengadores.',
       afiliacion: 'Heroe',
       universo: 'Marvel',
+      etiquetas: ['Agilidad', 'Estratega', 'Humano', 'Vigilante']
     },
     {
       nombre: 'Doctor Strange',
@@ -70,6 +77,7 @@ export class PersonajesService {
       descripcion: 'Un ex neurocirujano que se convierte en el Hechicero Supremo, protegiendo la Tierra de amenazas místicas.',
       afiliacion: 'Heroe',
       universo: 'Marvel',
+      etiquetas: ['Mistico', 'Estratega', 'Humano', 'Vigilante', 'Redimido']
     },
     {
       nombre: 'Black Panther',
@@ -78,6 +86,7 @@ export class PersonajesService {
       descripcion: 'El rey de Wakanda, que posee habilidades sobrehumanas gracias a la hierba en forma de corazón.',
       afiliacion: 'Heroe',
       universo: 'Marvel',
+      etiquetas: ['Lider', 'Velocista', 'Agilidad', 'Estratega', 'Humano']
     },
     {
       nombre: 'Captain Marvel',
@@ -86,88 +95,7 @@ export class PersonajesService {
       descripcion: 'Una piloto de la Fuerza Aérea que adquiere poderes cósmicos y se convierte en una heroína intergaláctica.',
       afiliacion: 'Heroe',
       universo: 'Marvel',
-    },
-
-    // AntiHeroes Marvel //
-    {
-      nombre: 'Deadpool',
-      alias: 'Wade Wilson',
-      imagen: 'assets/personajes/deadpool.jpg',
-      descripcion: 'Un mercenario con habilidades regenerativas y un sentido del humor irreverente.',
-      afiliacion: 'AntiHeroe',
-      universo: 'Marvel',
-    },
-    {
-      nombre: 'Wolverine',
-      alias: 'Logan',
-      imagen: 'assets/personajes/wolverine.jpg',
-      descripcion: 'Un mutante con garras retráctiles y un factor de curación acelerado.',
-      afiliacion: 'AntiHeroe',
-      universo: 'Marvel',
-    },
-    {
-      nombre: 'Venom',
-      alias: 'Eddie Brock',
-      imagen: 'assets/personajes/venom.jpg',
-      descripcion: 'Un simbionte alienígena que se une a Eddie Brock, otorgándole poderes sobrehumanos.',
-      afiliacion: 'AntiHeroe',
-      universo: 'Marvel',
-    },
-    {
-      nombre: 'Punisher',
-      alias: 'Frank Castle',
-      imagen: 'assets/personajes/punisher.jpg',
-      descripcion: 'Un vigilante que lucha contra el crimen utilizando métodos letales.',
-      afiliacion: 'AntiHeroe',
-      universo: 'Marvel',
-    },
-    {
-      nombre: 'Elektra',
-      alias: 'Elektra Natchios',
-      imagen: 'assets/personajes/elektra.jpg',
-      descripcion: 'Una asesina entrenada en artes marciales que a veces actúa como aliada de Daredevil.',
-      afiliacion: 'AntiHeroe',
-      universo: 'Marvel',
-    },
-    {
-      nombre: 'Moon Knight',
-      alias: 'Marc Spector',
-      imagen: 'assets/personajes/moonknight.jpg',
-      descripcion: 'Un ex mercenario que se convierte en un vigilante con múltiples personalidades.',
-      afiliacion: 'AntiHeroe',
-      universo: 'Marvel',
-    },
-    {
-      nombre: 'Winter Soldier',
-      alias: 'Bucky Barnes',
-      imagen: 'assets/personajes/wintersoldier.jpg',
-      descripcion: 'Un soldado mejorado con habilidades sobrehumanas y un brazo biónico.',
-      afiliacion: 'AntiHeroe',
-      universo: 'Marvel',
-    },
-    {
-      nombre: 'Scarlet Witch',
-      alias: 'Wanda Maximoff',
-      imagen: 'assets/personajes/scarletwitch.jpg',
-      descripcion: 'Una mutante con habilidades de manipulación de la realidad y la magia.',
-      afiliacion: 'AntiHeroe',
-      universo: 'Marvel',
-    },
-    {
-      nombre: 'Quicksilver',
-      alias: 'Pietro Maximoff',
-      imagen: 'assets/personajes/quicksilver.jpg',
-      descripcion: 'Un mutante con la capacidad de moverse a velocidades sobrehumanas.',
-      afiliacion: 'AntiHeroe',
-      universo: 'Marvel',
-    },
-    {
-      nombre: 'Silver Surfer',
-      alias: 'Norrin Radd',
-      imagen: 'assets/personajes/silversurfer.jpg',
-      descripcion: 'Un heraldo cósmico con la capacidad de manipular la energía y viajar a través del espacio.',
-      afiliacion: 'AntiHeroe',
-      universo: 'Marvel',
+      etiquetas: ['Cosmico', 'Velocista', 'Superfuerza', 'Agilidad', 'Estratega']
     },
 
     // Villanos Marvel //
@@ -178,6 +106,7 @@ export class PersonajesService {
       descripcion: 'El dios de las mentiras y el engaño, hermano adoptivo de Thor.',
       afiliacion: 'Villano',
       universo: 'Marvel',
+      etiquetas: ['Cosmico', 'Mentalista', 'Dios', 'Estratega', 'Redimido']
     },
     {
       nombre: 'Thanos',
@@ -186,6 +115,7 @@ export class PersonajesService {
       descripcion: 'Un titán loco obsesionado con el equilibrio universal, conocido por reunir las Gemas del Infinito.',
       afiliacion: 'Villano',
       universo: 'Marvel',
+      etiquetas: ['Cosmico', 'Superfuerza', 'Estratega', 'Oscuro', 'Psicopata', 'Tirano']
     },
     {
       nombre: 'Green Goblin',
@@ -194,6 +124,7 @@ export class PersonajesService {
       descripcion: 'Un empresario loco y archienemigo de Spider-Man.',
       afiliacion: 'Villano',
       universo: 'Marvel',
+      etiquetas: ['Agilidad', 'Humano', 'Impulsivo', 'Armadura avanzada','Tecnologico maligno']
     },
     {
       nombre: 'Doctor Octopus',
@@ -202,6 +133,7 @@ export class PersonajesService {
       descripcion: 'Un científico con brazos mecánicos que se convierte en un enemigo de Spider -Man.',
       afiliacion: 'Villano',
       universo: 'Marvel',
+      etiquetas: ['Tecnologico', 'Agilidad', 'Humano', 'Armadura avanzada', 'Tecnologico maligno']
     },
     {
       nombre: 'Magneto',
@@ -210,6 +142,7 @@ export class PersonajesService {
       descripcion: 'Un mutante con la capacidad de controlar el magnetismo y líder de los Hermanos Mutantes.',
       afiliacion: 'Villano',
       universo: 'Marvel',
+      etiquetas: ['Lider', 'Mutante', 'Mentalista', 'Manipulador']
     },
     {
       nombre: 'Red Skull',
@@ -218,6 +151,7 @@ export class PersonajesService {
       descripcion: 'Un líder nazi y archienemigo del Capitán América.',
       afiliacion: 'Villano',
       universo: 'Marvel',
+      etiquetas: ['Lider', 'Mutante', 'Oscuro', 'Genio criminal', 'Mistico oscuro']
     },
     {
       nombre: 'Ultron',
@@ -226,6 +160,7 @@ export class PersonajesService {
       descripcion: 'Una inteligencia artificial malvada creada por Tony Stark que busca la destrucción de la humanidad.',
       afiliacion: 'Villano',
       universo: 'Marvel',
+      etiquetas: ['Estratega', 'Armadura avanzada', 'Genio criminal', 'Psicopata', 'Tecnologico maligno']
     },
     {
       nombre: 'Kingpin',
@@ -234,6 +169,7 @@ export class PersonajesService {
       descripcion: 'Un poderoso criminal y archienemigo de Daredevil.',
       afiliacion: 'Villano',
       universo: 'Marvel',
+      etiquetas: ['Callejero', 'Estratega', 'Humano', 'Oscuro', 'Genio criminal']
     },
     {
       nombre: 'Mistério',
@@ -242,6 +178,7 @@ export class PersonajesService {
       descripcion: 'Un maestro de las ilusiones y enemigo de Spider-Man.',
       afiliacion: 'Villano',
       universo: 'Marvel',
+      etiquetas: ['Estratega', 'Humano', 'Genio criminal', 'Manipulador', 'Tecnologico maligno']
     },
 
     // Heroes DC //
@@ -252,6 +189,7 @@ export class PersonajesService {
       descripcion: 'Un extraterrestre del planeta Krypton con superpoderes que protege la Tierra.',
       afiliacion: 'Heroe',
       universo: 'DC',
+      etiquetas: ['Mutante', 'Superfuerza', 'Agilidad', 'Tecnologico maligno']
     },
     {
       nombre: 'Batman',
@@ -260,6 +198,7 @@ export class PersonajesService {
       descripcion: 'Un vigilante enmascarado que lucha contra el crimen en Gotham City.',
       afiliacion: 'Heroe',
       universo: 'DC',
+      etiquetas: ['Lider', 'Callejero', 'Estratega', 'Humano', 'Vigilante', 'Oscuro']
     },
     {
       nombre: 'Wonder Woman',
@@ -268,6 +207,7 @@ export class PersonajesService {
       descripcion: 'Una princesa amazona con fuerza sobrehumana y habilidades de combate excepcionales.',
       afiliacion: 'Heroe',
       universo: 'DC',
+      etiquetas: ['Mistico', 'Superfuerza', 'Agilidad', 'Humano']
     },
     {
       nombre: 'The Flash',
@@ -276,6 +216,7 @@ export class PersonajesService {
       descripcion: 'Un velocista con la capacidad de moverse a velocidades increíbles.',
       afiliacion: 'Heroe',
       universo: 'DC',
+      etiquetas: ['Velocista', 'Agilidad', 'Humano']
     },
     {
       nombre: 'Aquaman',
@@ -284,6 +225,7 @@ export class PersonajesService {
       descripcion: 'El rey de Atlantis con la capacidad de comunicarse con la vida marina.',
       afiliacion: 'Heroe',
       universo: 'DC',
+      etiquetas: ['Mistico', 'Agilidad', 'Humano']
     },
     {
       nombre: 'Green Lantern',
@@ -292,6 +234,7 @@ export class PersonajesService {
       descripcion: 'Un miembro del Cuerpo de Green Lanterns que utiliza un anillo de poder para crear construcciones de energía verde.',
       afiliacion: 'Heroe',
       universo: 'DC',
+      etiquetas: ['Cosmico', 'Agilidad', 'Estratega', 'Vigilante']
     },
     {
       nombre: 'Shazam',
@@ -300,6 +243,7 @@ export class PersonajesService {
       descripcion: 'Un joven que se transforma en un superhéroe adulto con poderes mágicos al pronunciar la palabra "Shazam".',
       afiliacion: 'Heroe',
       universo: 'DC',
+      etiquetas: ['Mistico', 'Humano', 'Vigilante']
     },
     {
       nombre: 'Green Arrow',
@@ -308,6 +252,7 @@ export class PersonajesService {
       descripcion: 'Un arquero experto y vigilante que lucha contra el crimen en Star City.',
       afiliacion: 'Heroe',
       universo: 'DC',
+      etiquetas: ['Agilidad', 'Estratega', 'Humano', 'Vigilante', 'Asesino entrenado']
     },
 
     // Villanos DC //
@@ -318,6 +263,7 @@ export class PersonajesService {
       descripcion: 'Un criminal psicópata y archienemigo de Batman.',
       afiliacion: 'Villano',
       universo: 'DC',
+      etiquetas: ['Callejero', 'Estratega', 'Humano', 'Impulsivo', 'Genio criminal', 'Manipulador', 'Psicopata']
     },
     {
       nombre: 'Darkseid',
@@ -326,6 +272,7 @@ export class PersonajesService {
       descripcion: 'Un dios tirano de Apokolips que busca conquistar el universo.',
       afiliacion: 'Villano', 
       universo: 'DC',
+      etiquetas: ['Cosmico', 'Dios', 'Oscuro', 'Psicopata', 'Tirano']
     },
     {
       nombre: 'Harley Quinn',
@@ -334,6 +281,7 @@ export class PersonajesService {
       descripcion: 'Una ex psiquiatra que se convierte en la compañera del Joker y una villana caótica.',
       afiliacion: 'Villano',
       universo: 'DC',
+      etiquetas: ['Callejero', 'Agilidad', 'Humano', 'Impulsivo', 'Manipulador', 'Psicopata']
     },
     {
       nombre: 'Deathstroke',
@@ -342,6 +290,7 @@ export class PersonajesService {
       descripcion: 'Un mercenario y asesino experto con habilidades sobrehumanas.',
       afiliacion: 'Villano',
       universo: 'DC',
+      etiquetas: ['Agilidad', 'Humano', 'Oscuro', 'Mercenario', 'Asesino entrenado']
     },
     {
       nombre: 'Brainiac',
@@ -350,6 +299,7 @@ export class PersonajesService {
       descripcion: 'Una inteligencia artificial alienígena que busca adquirir conocimiento y destruir mundos.',
       afiliacion: 'Villano',
       universo: 'DC',
+      etiquetas: ['Impulsivo', 'Mistico oscuro', 'Psicopata', 'Tirano', 'Tecnologico maligno']
     },
     {
       nombre: 'Sinestro',
@@ -358,6 +308,7 @@ export class PersonajesService {
       descripcion: 'Un ex Green Lantern que se convierte en un villano y líder del Cuerpo de Sinestro.',
       afiliacion: 'Villano',
       universo: 'DC',
+      etiquetas: ['Lider', 'Cosmico', 'Genio criminal', 'Mistico oscuro']
     },
     {
       nombre: 'Black Manta',
@@ -366,6 +317,7 @@ export class PersonajesService {
       descripcion: 'Un enemigo de Aquaman con un traje avanzado que le permite respirar bajo el agua y luchar contra el héroe.',
       afiliacion: 'Villano',
       universo: 'DC',
+      etiquetas: ['Agilidad', 'Estratega', 'Armadura avanzada', 'Mistico oscuro']
     },
     {
       nombre: 'Two-Face',
@@ -374,6 +326,7 @@ export class PersonajesService {
       descripcion: 'Un ex fiscal de distrito que se convierte en un villano con una personalidad dividida.',
       afiliacion: 'Villano',
       universo: 'DC',
+      etiquetas: ['Mistico', 'Callejero', 'Vigilante', 'Impulsivo','Genio criminal', 'Psicopata']
     },
   ];
 
