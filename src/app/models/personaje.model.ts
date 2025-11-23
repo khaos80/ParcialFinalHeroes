@@ -1,11 +1,16 @@
 export interface Personaje {
-    nombre: string;
-    alias: string;
-    imagen: string;
-    descripcion: string;
-    afiliacion: 'Heroe' | 'Villano';
-    universo: 'Marvel' | 'DC' | 'Otro';
-    etiquetas: Etiquetas[];
+  id: string;
+  nombre: string;
+  alias: string;
+  universo: 'Marvel' | 'DC' | 'Otro';
+  afiliacion: 'Heroe' | 'Villano';
+  estadisticasPoder: {inteligencia: number, fuerza: number, velocidad: number};
+  etiquetas: Etiquetas[];
+  debilidades: string[];
+  primeraAparicion: number;
+  rating: number;
+  imagen: string;
+  descripcion: string;
 }
 
 export type Etiquetas =
