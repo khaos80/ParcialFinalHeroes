@@ -11,7 +11,7 @@ import { LanguageService } from '.././services/language.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonSelect, IonSelectOption, IonItem, IonChip, IonAccordionGroup, IonAccordion, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonButtons, IonButton, IonIcon, IonLabel, IonCheckbox, NgFor, NgIf, NgClass],
+  imports: [ IonSelect, IonSelectOption, IonItem, IonChip, IonAccordionGroup, IonAccordion, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonButtons, IonButton, IonIcon, IonLabel, IonCheckbox, NgFor, NgIf, NgClass],
 })
 
 export class Homepage implements OnInit {
@@ -21,6 +21,7 @@ export class Homepage implements OnInit {
 
   personajes: Personaje[] = [];
   personajesFiltrados: Personaje[] = [];
+  personajeExpandido: Personaje | null = null;
 
   private index: number = 0;
   private batchSize: number = 15;
@@ -210,5 +211,13 @@ export class Homepage implements OnInit {
         break;
       }
     this.aplicarFiltros();
+  }
+
+  expandirCard(p: Personaje) {
+    this.personajeExpandido = p;
+  }
+
+  cerrarExpandido() {
+    this.personajeExpandido = null;
   }
 }

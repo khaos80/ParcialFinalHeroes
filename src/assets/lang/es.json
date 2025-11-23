@@ -27,9 +27,14 @@
     "FILTER_ORDER_AZ": "Ordenar A → Z",
     "FILTER_ORDER_ZA": "Ordenar Z → A",
     "FILTER_CLEAR": "Limpiar filtros",
+    "DETAILS": "Detalles",
     "TYPE": "Tipo",
     "UNIVERSE": "Universo",
     "LABEL": "Etiquetas",
+    "BIBLIOGRAPHY": "Bibliografia",
+    "POWERS": "Poderes",
+    "WEAKNESSES": "Debilidades",
+    "FIRSTAPPAEARANCE": "Primera Aparición",
     "LOADING": "Cargando más personajes..."
   }
 }
