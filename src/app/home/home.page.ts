@@ -3,7 +3,7 @@ import { Personaje } from '../models/personaje.model';
 import { PersonajesService } from '../services/personajes';
 import { IonSelect, IonSelectOption, IonItem, IonChip, IonAccordionGroup, IonAccordion } from '@ionic/angular/standalone';
 import { InfiniteScrollCustomEvent, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonButtons, IonButton, IonIcon, IonLabel, IonCheckbox } from '@ionic/angular/standalone';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, NgClass } from '@angular/common';
 import { LanguageService } from '.././services/language.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { LanguageService } from '.././services/language.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [ IonSelect, IonSelectOption, IonItem, IonChip, IonAccordionGroup, IonAccordion, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonButtons, IonButton, IonIcon, IonLabel, IonCheckbox, NgFor, NgIf ],
+  imports: [IonSelect, IonSelectOption, IonItem, IonChip, IonAccordionGroup, IonAccordion, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonButtons, IonButton, IonIcon, IonLabel, IonCheckbox, NgFor, NgIf, NgClass],
 })
 
 export class Homepage implements OnInit {
