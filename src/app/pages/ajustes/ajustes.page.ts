@@ -1,26 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {IonBackButton,
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonListHeader,
-  IonRange,
-  IonText,
-  IonTitle,
-  IonToggle,
-  IonToolbar,
-  IonSelect,
-  IonSelectOption} from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons/icons';
-
+import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonList, IonTitle, IonToggle, IonToolbar, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
@@ -28,12 +9,9 @@ import { LanguageService } from '../../services/language.service';
   templateUrl: './ajustes.page.html',
   styleUrls: ['./ajustes.page.scss'],
   standalone: true,
-  imports: [
-    IonContent, IonHeader, IonTitle, IonToolbar,
-    IonList, IonItem, IonLabel, IonToggle, IonSelect, IonSelectOption, IonButton,
-    CommonModule, FormsModule, IonButtons, IonBackButton, IonIcon, IonText, IonListHeader, IonRange
-  ]
+  imports: [ CommonModule, FormsModule, IonButton, IonContent, IonHeader, IonItem, IonLabel, IonList, IonTitle, IonToggle, IonToolbar, IonSelect, IonSelectOption]
 })
+
 export class AjustesPage implements OnInit {
   paletteToggle = false;
   language: 'es' | 'en' = 'es';
@@ -46,6 +24,7 @@ export class AjustesPage implements OnInit {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
      this.initializeDarkPalette(prefersDark.matches);
     prefersDark.addEventListener('change', (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches));
+    
     // Idioma
     this.language = this.langService.getLanguage();
 
@@ -55,6 +34,7 @@ export class AjustesPage implements OnInit {
     this.applyFontSize();
   }
 
+  // Función de cambio de Tema entre Light/Dark
   initializeDarkPalette(isDark: boolean) {
     this.paletteToggle = isDark;
     this.toggleDarkPalette(isDark);
@@ -66,23 +46,23 @@ export class AjustesPage implements OnInit {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
   }
 
-
+  // Funcioón de cambio de lenguaje entre Español/Ingles
   changeLanguage() {
     this.langService.setLanguage(this.language);
   }
 
+  // Función de cambio y aplicación de tamaño de fuente
   changeFontSize() {
     localStorage.setItem('fontSize', this.fontSize);
     this.applyFontSize();
   }
-
   applyFontSize() {
     document.body.classList.remove('font-small', 'font-medium', 'font-large');
     document.body.classList.add(`font-${this.fontSize}`);
   }
 
+  // Función restablecer valores de ajustes a predeterminados
   resetDefaults() {
-    // Restablecer valores
     localStorage.removeItem('theme');
     localStorage.removeItem('language');
     localStorage.removeItem('fontSize');

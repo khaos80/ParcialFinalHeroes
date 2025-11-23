@@ -5,7 +5,7 @@ export interface Personaje {
   universo: 'Marvel' | 'DC' | 'Otro';
   afiliacion: 'Heroe' | 'Villano';
   estadisticasPoder: {inteligencia: number, fuerza: number, velocidad: number};
-  etiquetas: Etiquetas[];
+  etiquetas?: Etiqueta[] | string[];
   debilidades: string[];
   primeraAparicion: number;
   rating: number;
@@ -13,7 +13,7 @@ export interface Personaje {
   descripcion: string;
 }
 
-export type Etiquetas =
+export type Etiqueta =
   | 'Lider'
   | 'Tecnologico'
   | 'Mistico'

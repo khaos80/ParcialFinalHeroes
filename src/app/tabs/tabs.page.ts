@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel
-} from '@ionic/angular/standalone';
+import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel} from '@ionic/angular/standalone';
 import { LanguageService } from '.././services/language.service';
 
 @Component({
@@ -16,6 +14,7 @@ import { LanguageService } from '.././services/language.service';
     CommonModule, FormsModule
   ]
 })
+
 export class TabsPage {
   constructor(private lang: LanguageService) {}
 
