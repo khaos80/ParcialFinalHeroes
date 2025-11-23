@@ -1,50 +1,100 @@
 <ion-header>
-
   <ion-toolbar>
-    <ion-title>{{ t('HOME.TITLE') }}</ion-title>
+    <ion-title>
+      {{ t('HOME.TITLE') }}
+    </ion-title>
   </ion-toolbar>
 
   <ion-toolbar>
+      <!-- Barra de Busqueda -->
     <ion-searchbar
       [placeholder]="t('HOME.SEARCH_PLACEHOLDER')"
-      [attr.aria-label]="t('HOME.SEARCH_PLACEHOLDER')"
       debounce="300"
       (ionInput)="buscar($event)">
     </ion-searchbar>
 
+      <!-- Botón para abrir los filtros -->
     <ion-buttons slot="end">
       <ion-button (click)="abrirSelectFiltros()">
-        <ion-icon slot="icon-only" name="filter-outline" aria-hidden="true"></ion-icon>
+        <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-item style="display: none;">
-    <ion-select #selectFiltros [placeholder]="t('HOME.FILTERS')" interface="popover" (ionChange)="aplicarFiltro($event)">
-      <!-- Filtro por Universo -->
-      <ion-select-option value="universo:Marvel">{{ t('HOME.FILTER_UNIVERSE_MARVEL') }}</ion-select-option>
-      <ion-select-option value="universo:DC">{{ t('HOME.FILTER_UNIVERSE_DC') }}</ion-select-option>
+  <!-- División para mostrar filtros seleccionados en el momento -->
+  <div *ngIf="mostrarFiltrosActivos()" class="filtros-activos">
+    <ion-chip *ngIf="filtroUniverso">
+      {{ filtroUniverso }}
+      <ion-icon name="close" (click)="quitarFiltro('universo', filtroUniverso)"></ion-icon>
+    </ion-chip>
 
-      <!-- Filtro por Afiliación -->
-      <ion-select-option value="afiliacion:Heroe">Afiliación: Heroe</ion-select-option>
+    <ion-chip *ngIf="filtroAfiliacion">
+      {{ filtroAfiliacion }}
+      <ion-icon name="close" (click)="quitarFiltro('afiliacion', filtroAfiliacion)"></ion-icon>
+    </ion-chip>
+
+    <ion-chip *ngFor="let et of filtroEtiquetas">
+      {{ et }}
+      <ion-icon name="close" (click)="quitarFiltro('etiqueta', et)"></ion-icon>
+    </ion-chip>
+
+    <ion-chip *ngIf="ordenNombre">
+      {{ ordenNombre }}
+      <ion-icon name="close" (click)="quitarFiltro('orden', ordenNombre)"></ion-icon>
+    </ion-chip>
+  </div>
+
+  <!-- Selección de filtros por medio de botón de filtros -->
+  <ion-item style="display: none;">
+    <ion-select #selectFiltros interface="popover" (ionChange)="aplicarFiltro($event)">
+
+      <!-- Filtro según universo -->
+      <ion-select-option value="universo:Marvel">Universo: Marvel</ion-select-option>
+      <ion-select-option value="universo:DC">Universo: DC</ion-select-option>
+
+      <!-- Filtro según afiliación -->
+      <ion-select-option value="afiliacion:Heroe">Afiliación: Héroe</ion-select-option>
       <ion-select-option value="afiliacion:Villano">Afiliación: Villano</ion-select-option>
 
-      <!-- Filtro Orden por Nombre -->
-      <ion-select-option value="orden:A-Z">{{ t('HOME.FILTER_ORDER_AZ') }}</ion-select-option>
-      <ion-select-option value="orden:Z-A">{{ t('HOME.FILTER_ORDER_ZA') }}</ion-select-option>
-     
-      <!-- Quitar filtros -->
-      <ion-select-option value="Limpiar">{{ t('HOME.FILTER_CLEAR') }}</ion-select-option>
-</ion-select>
-  </ion-item>
+      <!-- Filtro según ordenamiento alfabetico -->
+      <ion-select-option value="orden:A-Z">Ordenar A → Z</ion-select-option>
+      <ion-select-option value="orden:Z-A">Ordenar Z → A</ion-select-option>
 
+      <!-- Limpieza de todos los filtros -->
+      <ion-select-option value="Limpiar">Limpiar filtros</ion-select-option>
+    </ion-select>
+  </ion-item>
 </ion-header>
 
-<ion-content>
+<!-- ACORDEÓN DE ETIQUETAS -->
+<div class="filtro-acordeon-wrapper">
+  <ion-accordion-group expand="inset">
+    <ion-accordion value="etiquetas">
 
+      <ion-item slot="header">
+        <ion-label>Etiquetas</ion-label>
+      </ion-item>
+
+      <div slot="content" class="etiquetas-grid">
+        <ion-item class="etiqueta-item" *ngFor="let etiqueta of etiquetasDisponibles">
+          <ion-label>{{ etiqueta }}</ion-label>
+          <ion-checkbox
+            [checked]="filtroEtiquetas.includes(etiqueta)"
+            (ionChange)="toggleEtiqueta(etiqueta)">
+          </ion-checkbox>
+        </ion-item>
+      </div>
+
+    </ion-accordion>
+  </ion-accordion-group>
+</div>
+
+<ion-content>
   <ion-list>
+    <!-- Listado de tarjetas para cada personaje -->
     <ion-card *ngFor="let p of personajesFiltrados">
       <img [src]="p.imagen" alt="{{ p.nombre }}" loading="lazy"/>
+
       <ion-card-header>
         <ion-card-title>{{ p.nombre }}</ion-card-title>
       </ion-card-header>
@@ -53,19 +103,17 @@
         <p>
           {{ t('HOME.TYPE') }}: <strong>{{ p.afiliacion }}</strong><br />
           {{ t('HOME.UNIVERSE') }}: <strong>{{ p.universo }}</strong><br />
-          {{ t('HOME.LABEL')}}: <strong>{{ p.etiquetas }}</strong>
+          {{ t('HOME.LABEL') }}: <strong>{{ p.etiquetas }}</strong>
         </p>
       </ion-card-content>
 
     </ion-card>
   </ion-list>
 
-  <!-- Infinite Scroll -->
+  <!-- Infinite Scroll para toda la pagina -->
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="crescent"
-      [loadingText]="t('HOME.LOADING')"
-      [attr.aria-label]="t('HOME.LOADING')">
+    <ion-infinite-scroll-content loadingSpinner="crescent"
+      [loadingText]="t('HOME.LOADING')">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 

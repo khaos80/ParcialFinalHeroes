@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Personaje } from '../models/personaje.model';
 import { PersonajesService } from '../services/personajes';
-import { ViewChild } from '@angular/core';
-import { IonSelect, IonSelectOption, IonItem } from '@ionic/angular/standalone';
-import { InfiniteScrollCustomEvent, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonCardSubtitle, IonButtons, IonButton, IonIcon } from '@ionic/angular/standalone';
-import { NgFor } from '@angular/common';
+import { IonSelect, IonSelectOption, IonItem, IonChip, IonAccordionGroup, IonAccordion } from '@ionic/angular/standalone';
+import { InfiniteScrollCustomEvent, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonButtons, IonButton, IonIcon, IonLabel, IonCheckbox } from '@ionic/angular/standalone';
+import { NgFor, NgIf } from '@angular/common';
 import { LanguageService } from '.././services/language.service';
 
 @Component({
@@ -12,10 +11,13 @@ import { LanguageService } from '.././services/language.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonItem, NgFor, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonButtons, IonButton, IonIcon, IonSelect, IonSelectOption ],
+  imports: [ IonSelect, IonSelectOption, IonItem, IonChip, IonAccordionGroup, IonAccordion, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonButtons, IonButton, IonIcon, IonLabel, IonCheckbox, NgFor, NgIf ],
 })
 
 export class Homepage implements OnInit {
+
+  // Referencia al IonSelect
+  @ViewChild('selectFiltros', { static: false }) selectFiltros!: IonSelect;
 
   personajes: Personaje[] = [];
   personajesFiltrados: Personaje[] = [];
@@ -23,33 +25,51 @@ export class Homepage implements OnInit {
   private index: number = 0;
   private batchSize: number = 15;
 
+  // Filtro seleccionado
+  filtroUniverso: string = '';
+  filtroAfiliacion: string = '';
+  filtroEtiquetas: string[] = [];
+  ordenNombre: 'A-Z' | 'Z-A' | '' = '';
+
+  etiquetasDisponibles: string[] = [];
+
   constructor(private personajesService: PersonajesService, private lang: LanguageService) {}
   
   t(key: string) {
     return this.lang.t(key);
   }
+
   ngOnInit() {
     // Cargar personajes desde el servicio
     this.personajes = this.personajesService.getPersonajes();
 
-    // Cargar primer lote
+    // Obtiene etiqueta todas las etiquetas de los personajes
+    this.obtenerEtiquetas();
+
+    // Cargar primer lote de personajes
     this.loadMore();
   }
 
-  // Función para cargar más personajes
+  // Función para cargar etiquetas seleccionadas
+  obtenerEtiquetas() {
+    const setEtiquetas = new Set<string>();
+    this.personajes.forEach(p => {
+      p.etiquetas?.forEach(e => setEtiquetas.add(e));
+    });
+    this.etiquetasDisponibles = Array.from(setEtiquetas);
+  }
+
+  // Infinite Scroll
   loadMore(event?: any) {
     const start = this.index;
     const end = this.index + this.batchSize;
-
     const nuevos = this.personajes.slice(start, end);
     this.personajesFiltrados.push(...nuevos);
-
     this.index = end;
 
     if (event) {
       setTimeout(() => {
         event.target.complete();
-
         if (this.index >= this.personajes.length) {
           event.target.disabled = true;
         }
@@ -57,12 +77,11 @@ export class Homepage implements OnInit {
     }
   }
 
-  // Manejador del evento de scroll infinito
   onIonInfinite(event: InfiniteScrollCustomEvent) {
     this.loadMore(event);
   }
 
-  // Función de búsqueda
+  // Función de búsqueda de personaje
   buscar(event: any) {
     const texto = event.target.value.toLowerCase();
 
@@ -81,16 +100,8 @@ export class Homepage implements OnInit {
       p.universo.toLowerCase().includes(texto)
     );
   }
-
-  // Referencia al IonSelect
-  @ViewChild('selectFiltros', { static: false }) selectFiltros!: IonSelect;
-
-  // Filtro seleccionado
-  filtroUniverso: string = '';
-  filtroAfiliacion: string = '';
-  ordenNombre: 'A-Z' | 'Z-A' | '' = '';
   
-  // Función para abrir el IonSelect
+  // Función para abrir el IonSelect de filtros
   abrirSelectFiltros() {
     this.selectFiltros.open();
   }
@@ -102,7 +113,15 @@ export class Homepage implements OnInit {
     if (valor === 'Limpiar') {
       this.filtroUniverso = '';
       this.filtroAfiliacion = '';
+      this.filtroEtiquetas = [];
       this.ordenNombre = '';
+      this.aplicarFiltros();
+      return;
+    }
+
+    // Multi-Etiquetas para filtro de personajes
+    if (Array.isArray(valor)) {
+      this.filtroEtiquetas = valor;
       this.aplicarFiltros();
       return;
     }
@@ -124,31 +143,72 @@ export class Homepage implements OnInit {
     this.aplicarFiltros();
   }
   
+  // Funcion activacion de acordeón de etiquetas
+  toggleEtiqueta(etiqueta: string) {
+    if (this.filtroEtiquetas.includes(etiqueta)) {
+      this.filtroEtiquetas = this.filtroEtiquetas.filter(e => e !== etiqueta);
+    } else {
+      this.filtroEtiquetas.push(etiqueta);
+    }
+    this.aplicarFiltros();
+  }
+
   // Función para aplicar los filtros y ordenamientos
   aplicarFiltros() {
     let filtrados = [...this.personajes];
 
     if (this.filtroUniverso) {
-      filtrados = filtrados.filter(p => p.universo.toLowerCase() === this.filtroUniverso.toLowerCase());
+      filtrados = filtrados.filter(p =>
+        p.universo.toLowerCase() === this.filtroUniverso.toLowerCase()
+      );
     }
-
     if (this.filtroAfiliacion) {
-
       const af = this.filtroAfiliacion.toLowerCase().replace(/[- ]/g, '');
-      filtrados = filtrados.filter(p => {
-        const afiliacionPersonaje = p.afiliacion.toLowerCase().replace(/[- ]/g, '');
-        return afiliacionPersonaje === af;
-      });
+      filtrados = filtrados.filter(p => 
+        p.afiliacion.toLowerCase().replace(/[- ]/g, '') === af
+      );
     }
-
+    if (this.filtroEtiquetas.length > 0) {
+      filtrados = filtrados.filter(p =>
+        this.filtroEtiquetas.every(et =>
+          (p.etiquetas ?? []).includes(et))
+      );
+    }
     if (this.ordenNombre === 'A-Z') {
       filtrados = [...filtrados].sort((a, b) => a.nombre.localeCompare(b.nombre));
     }
-
     if (this.ordenNombre === 'Z-A') {
       filtrados = [...filtrados].sort((a, b) => b.nombre.localeCompare(a.nombre));
     }
-
     this.personajesFiltrados = filtrados;
+  }
+
+  // Función para mostrar filtros seleccionados
+  mostrarFiltrosActivos() {
+    return (
+      this.filtroUniverso !== '' ||
+      this.filtroAfiliacion !== '' ||
+      this.filtroEtiquetas.length > 0 ||
+      this.ordenNombre !== ''
+    );
+  }
+
+  // Función para eliminar filtros seleccionados
+  quitarFiltro(tipo: string, valor: string) {
+    switch (tipo) {
+      case 'universo':
+        this.filtroUniverso = '';
+        break;
+      case 'afiliacion':
+        this.filtroAfiliacion = '';
+        break;
+      case 'etiqueta':
+        this.filtroEtiquetas = this.filtroEtiquetas.filter(e => e !== valor);
+        break;
+      case 'orden':
+        this.ordenNombre = '';
+        break;
+      }
+    this.aplicarFiltros();
   }
 }

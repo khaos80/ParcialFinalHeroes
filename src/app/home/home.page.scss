@@ -24,3 +24,56 @@
 #container a {
   text-decoration: none;
 }
+
+.etiquetas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+  gap: 6px 12px;
+  padding: 10px;
+
+  max-height: 260px;     /* Altura máxima visible */
+  overflow-y: auto;      /* Scroll vertical */
+  scrollbar-width: thin; /* Scroll fino (Firefox) */
+
+  /* Scroll personalizado para Webkit (Chrome, Edge) */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+  }
+}
+
+/* Ion-item visualmente compacto */
+.etiqueta-item {
+  --padding-start: 8px;
+  --inner-padding-end: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Ajuste del checkbox a la derecha */
+.etiqueta-item ion-checkbox {
+  margin-left: auto;
+}
+
+
+/* Ajuste visual de cada item */
+.etiqueta-item {
+  --padding-start: 8px;
+  --inner-padding-end: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05); /* opcional */
+}
+
+/* Mejor alineación del checkbox */
+.etiqueta-item ion-checkbox {
+  margin-left: auto;
+}

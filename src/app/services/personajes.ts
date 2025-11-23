@@ -4,6 +4,7 @@ import { Personaje } from '../models/personaje.model';
 @Injectable({
   providedIn: 'root',
 })
+
 export class PersonajesService {
   private personajes: Personaje[] = [
     // Heroes Marvel //

@@ -12,12 +12,14 @@
   </ion-header>
 
   <ion-list>
+    <!-- Activar/Desactivar Light/Dark Mode -->
     <ion-item>
       <ion-label>{{ t('DARK_MODE') }}</ion-label>
       <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between"
       [attr.aria-label]="t('DARK_MODE')" role="switch">Dark Mode</ion-toggle>
     </ion-item>
 
+    <!-- Cambio de lenguaje Español/Ingles -->
     <ion-item>
       <ion-label>{{ t('LANGUAGE') }}</ion-label>
       <ion-select [(ngModel)]="language" (ionChange)="changeLanguage()" [attr.aria-label]="t('LANGUAGE')" role="combobox">
@@ -26,6 +28,7 @@
       </ion-select>
     </ion-item>
 
+    <!-- Cambio de tamaño de letras de opciones (Favoritos, Explorar, Ajustes) -->
     <ion-item>
       <ion-label>{{ t('FONT_SIZE') }}</ion-label>
       <ion-select [(ngModel)]="fontSize" (ionChange)="changeFontSize()" [attr.aria-label]="t('FONT_SIZE')" role="combobox">
@@ -36,6 +39,7 @@
     </ion-item>
   </ion-list>
 
+  <!-- Reversar cambios a por defecto según el sistema -->
   <div style="padding:16px;">
     <ion-button expand="block" color="danger" (click)="resetDefaults()" [attr.aria-label]="t('RESET_DEFAULTS')" role="button">
       {{ t('RESET_DEFAULTS') }}
