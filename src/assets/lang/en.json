@@ -5,6 +5,7 @@
     "FAVORITES": "Favorites",
     "SETTINGS": "Settings"
   },
+
   "SETTINGS": "Settings",
   "DARK_MODE": "Dark mode",
   "LANGUAGE": "Language",
@@ -26,9 +27,14 @@
     "FILTER_ORDER_AZ": "Order A → Z",
     "FILTER_ORDER_ZA": "Order Z → A",
     "FILTER_CLEAR": "Clear filters",
+    "DETAILS": "Details",
     "TYPE": "Type",
     "UNIVERSE": "Universe",
     "LABEL": "Label",
+    "BIBLIOGRAPHY": "Bibliography",
+    "POWERS": "Powers",
+    "WEAKNESSES": "Weaknesses",
+    "FIRSTAPPAEARANCE": "First Appearance",
     "LOADING": "Loading more characters..."
   }
 }
