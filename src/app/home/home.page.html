@@ -79,11 +79,13 @@
         <ion-item class="etiqueta-item" *ngFor="let etiqueta of etiquetasDisponibles">
           <ion-label>{{ etiqueta }}</ion-label>
           <ion-checkbox
-            [checked]="filtroEtiquetas.includes(etiqueta)"
-            (ionChange)="toggleEtiqueta(etiqueta)">
-          </ion-checkbox>
-        </ion-item>
-      </div>
+          slot="end"
+          [checked]="filtroEtiquetas.includes(etiqueta)"
+          (ionChange)="toggleEtiqueta(etiqueta)">
+        </ion-checkbox>
+      </ion-item>
+    </div>
+
 
     </ion-accordion>
   </ion-accordion-group>
@@ -92,19 +94,25 @@
 <ion-content>
   <ion-list>
     <!-- Listado de tarjetas para cada personaje -->
-    <ion-card *ngFor="let p of personajesFiltrados">
-      <img [src]="p.imagen" alt="{{ p.nombre }}" loading="lazy"/>
+    <ion-card
+    *ngFor="let p of personajesFiltrados"
+    [ngClass]="p.universo === 'Marvel' ? 'marvel-card' : 'dc-card'">
+      
+      <img class="personaje-img" [src]="p.imagen" alt="{{ p.nombre }}" loading="lazy"/>
 
       <ion-card-header>
         <ion-card-title>{{ p.nombre }}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        <p>
-          {{ t('HOME.TYPE') }}: <strong>{{ p.afiliacion }}</strong><br />
-          {{ t('HOME.UNIVERSE') }}: <strong>{{ p.universo }}</strong><br />
-          {{ t('HOME.LABEL') }}: <strong>{{ p.etiquetas }}</strong>
-        </p>
+        <p><strong>{{ t('HOME.TYPE') }}: </strong>{{ p.afiliacion }}</p>
+        <p><strong>{{ t('HOME.UNIVERSE') }}: </strong>{{ p.universo }}</p>
+        <p><strong>{{ t('HOME.LABEL') }}: </strong></p>
+        <div class="etiquetas-wrapper">
+          <span class="tag" *ngFor="let tag of (p.etiquetas || '').toString().split(',')">
+            {{ tag.trim() }}
+          </span>
+        </div>
       </ion-card-content>
 
     </ion-card>
