@@ -20,18 +20,21 @@ export class AjustesPage implements OnInit {
   constructor(private langService: LanguageService) {}
 
   ngOnInit() {
-    // Tema
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-     this.initializeDarkPalette(prefersDark.matches);
-    prefersDark.addEventListener('change', (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches));
-    
-    // Idioma
-    this.language = this.langService.getLanguage();
+  // Tema
+  const savedTheme = localStorage.getItem('theme'); // "dark" o "light"
+  if (savedTheme) {
+    this.initializeDarkPalette(savedTheme === 'dark');
+  } else {
+    this.initializeDarkPalette(false);
+  }
 
-    // Tamaño de fuente
-    const savedSize = localStorage.getItem('fontSize') as 'small' | 'medium' | 'large' | null;
-    this.fontSize = savedSize ?? 'medium';
-    this.applyFontSize();
+  // Idioma
+  this.language = this.langService.getLanguage();
+
+  // Tamaño de fuente
+  const savedSize = localStorage.getItem('fontSize') as 'small' | 'medium' | 'large' | null;
+  this.fontSize = savedSize ?? 'medium';
+  this.applyFontSize();
   }
 
   // Función de cambio de Tema entre Light/Dark
@@ -44,6 +47,7 @@ export class AjustesPage implements OnInit {
   }
   toggleDarkPalette(shouldAdd: boolean) {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
+    localStorage.setItem('theme', shouldAdd ? 'dark' : 'light');
   }
 
   // Funcioón de cambio de lenguaje entre Español/Ingles
