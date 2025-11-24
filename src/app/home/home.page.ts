@@ -23,6 +23,7 @@ export class Homepage implements OnInit {
   personajes: Personaje[] = [];
   personajesFiltrados: Personaje[] = [];
   personajeExpandido: Personaje | null = null;
+  favoritos: string [] = [];
 
   private index: number = 0;
   private batchSize: number = 15;
@@ -49,6 +50,18 @@ export class Homepage implements OnInit {
     this.personajes = this.personajesService.getPersonajes();
     this.obtenerEtiquetas();
     this.loadMore();
+
+    this.favoritesService.favorites$.subscribe(ids => {
+      this.favoritos = ids;
+    });
+  }
+
+  esFavorito(personaje: Personaje): boolean {
+    return this.favoritos.includes(personaje.id);
+  }
+
+  toggleFavorito(personaje: Personaje) {
+    this.favoritesService.toggle(personaje);
   }
 
   // Función para cargar etiquetas seleccionadas

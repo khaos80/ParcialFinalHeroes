@@ -98,6 +98,13 @@
     *ngFor="let p of personajesFiltrados"
     (click)="expandirCard(p)"
     [ngClass]="p.universo === 'Marvel' ? 'marvel-card' : 'dc-card'">
+    
+    <ion-button 
+    fill="clear" 
+    class=" btn-fav-card" 
+    (click)="toggleFavorito(p); $event.stopPropagation();">
+      <ion-icon [name]="esFavorito(p) ? 'heart' : 'heart-outline'"></ion-icon>
+    </ion-button>
 
       <img class="personaje-img" [src]="p.imagen" alt="{{ p.nombre }}" loading="lazy"/>
 
@@ -141,6 +148,15 @@
       <ion-icon name="close-circle"></ion-icon>
     </ion-button>
 
+    <!-- Botón favoritos -->
+    <ion-button 
+      fill="clear" 
+      class="btn-fav-card expandido-btn-fav"
+      (click)="toggleFavorito(personajeExpandido); $event.stopPropagation();"
+      [ngClass]="{'activo': esFavorito(personajeExpandido)}">
+      <ion-icon [name]="esFavorito(personajeExpandido) ? 'heart' : 'heart-outline'"></ion-icon>
+    </ion-button>
+    
     <!-- Título -->
     <h1 class="titulo-seccion">{{ t('HOME.DETAILS') }}</h1>
 
@@ -149,7 +165,7 @@
 
     <!-- Nombre -->
     <h1>{{ personajeExpandido.nombre }}</h1>
-
+ 
     <!-- Biografía -->
     <p><strong>{{ t('HOME.BIBLIOGRAPHY') }}: </strong>{{ t('BIOGRAFIA.' + personajeExpandido.id) }}</p>
 

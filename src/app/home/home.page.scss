@@ -83,6 +83,15 @@
   border-top-right-radius: 12px;
 }
 
+.btn-fav-card {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  z-index: 10;
+  color: rgb(44, 255, 123);
+  --background: transparent;
+}
+
 /* Título del personaje */
 ion-card-title {
   font-weight: 700;
@@ -142,13 +151,13 @@ ion-card {
  ********************************************/
 .expandido-overlay {
   position: fixed;
-  top: 0;
+  top: env(safe-area-inset-top, 0);
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - env(safe-area-inset-top));
   background: rgba(0,0,0,0.65);
   backdrop-filter: blur(4px);
-  z-index: 999;
+  z-index: 10000;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -209,8 +218,9 @@ h1 {
 /* boton cerrar */
 .cerrar-btn {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  left: 10px;
+  top: 4px;
+  z-index: 15;
   color: white;
 }
 

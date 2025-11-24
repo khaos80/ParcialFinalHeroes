@@ -8,10 +8,10 @@ export class StorageService {
   constructor() {}
 
   async init() {
-    const storage = new Storage({
-      name: '__mydb'
-    });
-    this._storage = await storage.create();
+    if (!this._storage) {
+      const storage = new Storage({ name: '__mydb' });
+      this._storage = await storage.create();
+    }
   }
 
   async set(key: string, value: any) {

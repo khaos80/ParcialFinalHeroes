@@ -4,10 +4,143 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ t('TABS.FAVORITES') }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list>
+    <!-- Listado de tarjetas para cada personaje -->
+    <ion-card
+      *ngFor="let p of personajesFavoritos"
+      (click)="expandirCard(p)"
+      [ngClass]="p.universo === 'Marvel' ? 'marvel-card' : 'dc-card'">
+
+      <!-- Botón favorito -->
+      <ion-button 
+        fill="clear" 
+        class="btn-fav-card"
+        (click)="toggleFavorito(p); $event.stopPropagation();">
+        <ion-icon [name]="esFavorito(p) ? 'heart' : 'heart-outline'"></ion-icon>
+      </ion-button>
+
+      <!-- Imagen -->
+      <img class="personaje-img" [src]="p.imagen" alt="{{ p.nombre }}" loading="lazy"/>
+
+      <ion-card-header>
+        <ion-card-title>{{ p.nombre }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>{{ t('HOME.TYPE') }}: </strong>{{ p.afiliacion }}</p>
+        <p><strong>{{ t('HOME.UNIVERSE') }}: </strong>{{ p.universo }}</p>
+        <p><strong>{{ t('HOME.LABEL') }}: </strong></p>
+        <div class="etiquetas-wrapper">
+          <span [ngClass]="p.universo === 'Marvel' ? 'marvel-tag' : 'dc-tag'" *ngFor="let tag of (p.etiquetas || '').toString().split(',')">
+            {{ t('ETIQUETAS.' + tag.trim()) }}
+          </span>
+        </div>
+      </ion-card-content>
+
+    </ion-card>
+  </ion-list>
 </ion-content>
+
+<!-- CARD EXPANDIDA FULLSCREEN -->
+<div *ngIf="personajeExpandido" class="expandido-overlay">
+  <div class="expandido-card">
+
+    <!-- Botón cerrar -->
+    <ion-button fill="clear" class="cerrar-btn" (click)="cerrarExpandido()">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-button>
+
+    <!-- Botón favoritos -->
+    <ion-button 
+      fill="clear" 
+      class="btn-fav-card expandido-btn-fav"
+      (click)="toggleFavorito(personajeExpandido); $event.stopPropagation();"
+      [ngClass]="{'activo': esFavorito(personajeExpandido)}">
+      <ion-icon [name]="esFavorito(personajeExpandido) ? 'heart' : 'heart-outline'"></ion-icon>
+    </ion-button>
+    
+    <!-- Título -->
+    <h1 class="titulo-seccion">{{ t('HOME.DETAILS') }}</h1>
+
+    <!-- Imagen en alta -->
+    <img class="expandido-img" [src]="personajeExpandido.imagen" loading="lazy"/>
+
+    <!-- Nombre -->
+    <h1>{{ personajeExpandido.nombre }}</h1>
+ 
+    <!-- Biografía -->
+    <p><strong>{{ t('HOME.BIBLIOGRAPHY') }}: </strong>{{ t('BIOGRAFIA.' + personajeExpandido.id) }}</p>
+
+    <!-- Poderes (Etiquetas) -->
+    <p><strong>{{ t('HOME.POWERS') }}: </strong></p>
+    <div class="tags">
+      <span class="tag" *ngFor="let etiq of personajeExpandido.etiquetas">
+        {{ t('ETIQUETAS.' + etiq) }}
+      </span>
+    </div>
+
+    <!-- Debilidades -->
+    <p><strong>{{ t('HOME.WEAKNESSES') }}: </strong></p>
+    <div class="tags">
+      <span class="tag" *ngFor="let d of personajeExpandido.debilidades">
+        {{ t('DEBILIDADES.'+ d) }}
+      </span>
+    </div>
+
+    <!-- Primera aparición -->
+    <p><strong>{{ t('HOME.FIRSTAPPAEARANCE') }}: </strong> {{ personajeExpandido.primeraAparicion }}</p>
+
+    <!-- Universo -->
+    <p><strong>{{ t('HOME.UNIVERSE') }}: </strong> {{ personajeExpandido.universo }}</p>
+
+    <!-- MÉTRICAS -->
+    <h1 class="titulo-seccion">{{ t('HOME.METRICS') }}</h1>
+
+    <div class="metricas">
+
+      <!-- Fuerza -->
+      <div class="metrica">
+        <div class="metrica-header">
+          <label>{{ t('METRICAS.FUERZA') }}</label>
+          <span class="valor">{{ personajeExpandido.estadisticasPoder.fuerza }}</span>
+        </div>
+        <div class="barra">
+          <div
+            [ngClass]="personajeExpandido.universo === 'Marvel' ? 'marvel-relleno' : 'dc-relleno'"
+            [style.width.%]="personajeExpandido.estadisticasPoder.fuerza">
+          </div>
+        </div>
+      </div>
+
+      <!-- Velocidad -->
+      <div class="metrica">
+        <div class="metrica-header">
+          <label>{{ t('METRICAS.VELOCIDAD') }}</label>
+          <span class="valor">{{ personajeExpandido.estadisticasPoder.velocidad }}</span>
+        </div>
+        <div class="barra">
+          <div
+            [ngClass]="personajeExpandido.universo === 'Marvel' ? 'marvel-relleno' : 'dc-relleno'"
+            [style.width.%]="personajeExpandido.estadisticasPoder.velocidad">
+          </div>
+        </div>
+      </div>
+
+      <!-- Inteligencia -->
+      <div class="metrica">
+        <div class="metrica-header">
+          <label>{{ t('METRICAS.INTELIGENCIA') }}</label>
+          <span class="valor">{{ personajeExpandido.estadisticasPoder.inteligencia }}</span>
+        </div>
+        <div class="barra">
+          <div
+            [ngClass]="personajeExpandido.universo === 'Marvel' ? 'marvel-relleno' : 'dc-relleno'"
+            [style.width.%]="personajeExpandido.estadisticasPoder.inteligencia">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
