@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { LanguageService } from '../../services/language.service';
+import { Personaje } from 'src/app/models/personaje.model';
+import { PersonajesService } from 'src/app/services/personajes';
+import { FavoritesService } from 'src/app/services/favorites.service'; 
+import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-favoritos',
@@ -13,12 +16,21 @@ import { LanguageService } from '../../services/language.service';
 })
 export class FavoritosPage implements OnInit {
 
-  constructor(private lang: LanguageService) { }
+  favoritos: Personaje[] = [];
+
+  constructor(
+    private personajesService: PersonajesService,
+    private lang: LanguageService,
+    private favoritesService: FavoritesService
+  ) { }
 
    t(key: string) {
     return this.lang.t(key);
   }
-  ngOnInit() {
-  }
 
+  ngOnInit() {
+    this.favoritesService.favorites$.subscribe(ids => {
+      this.favoritos = this.personajesService.getPersonajes().filter(p => ids.includes(p.id));
+    });
+  }
 }

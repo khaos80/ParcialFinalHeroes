@@ -87,7 +87,6 @@
       </ion-item>
     </div>
 
-
     </ion-accordion>
   </ion-accordion-group>
 </div>
@@ -99,7 +98,7 @@
     *ngFor="let p of personajesFiltrados"
     (click)="expandirCard(p)"
     [ngClass]="p.universo === 'Marvel' ? 'marvel-card' : 'dc-card'">
-      
+
       <img class="personaje-img" [src]="p.imagen" alt="{{ p.nombre }}" loading="lazy"/>
 
       <ion-card-header>
