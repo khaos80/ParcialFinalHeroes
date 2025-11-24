@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Personaje } from '../models/personaje.model';
 import { PersonajesService } from '../services/personajes';
+import { FavoritesService } from '../services/favorites.service';
+import { LanguageService } from '.././services/language.service';
 import { IonSelect, IonSelectOption, IonItem, IonChip, IonAccordionGroup, IonAccordion } from '@ionic/angular/standalone';
 import { InfiniteScrollCustomEvent, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonList, IonHeader, IonButtons, IonButton, IonIcon, IonLabel, IonCheckbox } from '@ionic/angular/standalone';
 import { NgFor, NgIf, NgClass } from '@angular/common';
-import { LanguageService } from '.././services/language.service';
 
 @Component({
   selector: 'app-home',
@@ -34,20 +35,19 @@ export class Homepage implements OnInit {
 
   etiquetasDisponibles: string[] = [];
 
-  constructor(private personajesService: PersonajesService, private lang: LanguageService) {}
+  constructor(
+    private personajesService: PersonajesService, 
+    private lang: LanguageService, 
+    private favoritesService: FavoritesService
+  ) {}
   
   t(key: string) {
     return this.lang.t(key);
   }
 
   ngOnInit() {
-    // Cargar personajes desde el servicio
     this.personajes = this.personajesService.getPersonajes();
-
-    // Obtiene etiqueta todas las etiquetas de los personajes
     this.obtenerEtiquetas();
-
-    // Cargar primer lote de personajes
     this.loadMore();
   }
 
