@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { StorageService } from './storage.service';
+import { Personaje } from '../models/personaje.model';
 
 @Injectable({ providedIn: 'root' })
 export class FavoritesService {
@@ -8,27 +9,29 @@ export class FavoritesService {
   favorites$ = this.favoritesSubject.asObservable();
 
   constructor(private storageService: StorageService) {
-    this.loadFavorites();
+    this.initFavorites();
   }
 
-  private async loadFavorites() {
-    const stored = (await this.storageService.get('favorites')) || [];
+  private async initFavorites() {
+    await this.storageService.init();
+    const stored: string[] = (await this.storageService.get('favorites')) || [];
     this.favoritesSubject.next(stored);
   }
 
-  async addFavorite(id: string) {
-    const current = (await this.storageService.get('favorites')) || [];
-    if (!current.includes(id)) {
-      const updated = [...current, id];
-      await this.storageService.set('favorites', updated);
+  async toggle(personaje: Personaje) {
+    const current = [...this.favoritesSubject.value];
+    if (current.includes(personaje.id)) {
+      const updated = current.filter(id => id !== personaje.id);
       this.favoritesSubject.next(updated);
+      await this.storageService.set('favorites', updated);
+    } else {
+      const updated = [...current, personaje.id];
+      this.favoritesSubject.next(updated);
+      await this.storageService.set('favorites', updated);
     }
   }
 
-  async removeFavorite(id: string) {
-    const current = (await this.storageService.get('favorites')) || [];
-    const updated = current.filter((f: string) => f !== id);
-    await this.storageService.set('favorites', updated);
-    this.favoritesSubject.next(updated);
+  isFavorito(personaje: Personaje): boolean {
+    return this.favoritesSubject.value.includes(personaje.id);
   }
 }
