@@ -9,23 +9,24 @@
       <!-- Barra de Busqueda -->
     <ion-searchbar
       [placeholder]="t('HOME.SEARCH_PLACEHOLDER')"
+      [attr.aria-label]="t('HOME.SEARCH_PLACEHOLDER')"
       debounce="300"
       (ionInput)="buscar($event)">
     </ion-searchbar>
 
       <!-- Botón para abrir los filtros -->
     <ion-buttons slot="end">
-      <ion-button (click)="abrirSelectFiltros()">
-        <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
+      <ion-button (click)="abrirSelectFiltros()" [attr.aria-label]="t('HOME.FILTERS')" role="button">
+        <ion-icon slot="icon-only" name="filter-outline" aria-hidden="true"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 
   <!-- División para mostrar filtros seleccionados en el momento -->
-  <div *ngIf="mostrarFiltrosActivos()" class="filtros-activos">
+  <div *ngIf="mostrarFiltrosActivos()" class="filtros-activos" [attr.aria-label]="t('HOME.UNIVERSE') + ': ' + filtroUniverso">
     <ion-chip *ngIf="filtroUniverso">
       {{ filtroUniverso }}
-      <ion-icon name="close" (click)="quitarFiltro('universo', filtroUniverso)"></ion-icon>
+      <ion-icon name="close" (click)="quitarFiltro('universo', filtroUniverso)" aria-label="Quitar filtro"></ion-icon>
     </ion-chip>
 
     <ion-chip *ngIf="filtroAfiliacion">
@@ -49,19 +50,19 @@
     <ion-select #selectFiltros interface="popover" (ionChange)="aplicarFiltro($event)">
 
       <!-- Filtro según universo -->
-      <ion-select-option value="universo:Marvel">Universo: Marvel</ion-select-option>
-      <ion-select-option value="universo:DC">Universo: DC</ion-select-option>
+      <ion-select-option value="universo:Marvel">{{ t('HOME.FILTER_UNIVERSE_MARVEL') }}</ion-select-option>
+      <ion-select-option value="universo:DC">{{ t('HOME.FILTER_UNIVERSE_DC') }}</ion-select-option>
 
       <!-- Filtro según afiliación -->
-      <ion-select-option value="afiliacion:Heroe">Afiliación: Héroe</ion-select-option>
-      <ion-select-option value="afiliacion:Villano">Afiliación: Villano</ion-select-option>
+      <ion-select-option value="afiliacion:Heroe">{{ t('HOME.FILTER_AFFILIATION_HERO') }}</ion-select-option>
+      <ion-select-option value="afiliacion:Villano">{{ t('HOME.FILTER_AFFILIATION_VILLAIN') }}</ion-select-option>
 
       <!-- Filtro según ordenamiento alfabetico -->
-      <ion-select-option value="orden:A-Z">Ordenar A → Z</ion-select-option>
-      <ion-select-option value="orden:Z-A">Ordenar Z → A</ion-select-option>
+      <ion-select-option value="orden:A-Z">{{ t('HOME.FILTER_ORDER_AZ') }}</ion-select-option>
+      <ion-select-option value="orden:Z-A">{{ t('HOME.FILTER_ORDER_ZA') }}</ion-select-option>
 
       <!-- Limpieza de todos los filtros -->
-      <ion-select-option value="Limpiar">Limpiar filtros</ion-select-option>
+      <ion-select-option value="Limpiar">{{ t('HOME.FILTER_CLEAR') }}</ion-select-option>
     </ion-select>
   </ion-item>
 </ion-header>
@@ -72,12 +73,12 @@
     <ion-accordion value="etiquetas">
 
       <ion-item slot="header">
-        <ion-label>Etiquetas</ion-label>
+        <ion-label>{{ t('HOME.LABEL') }}</ion-label>
       </ion-item>
 
       <div slot="content" class="etiquetas-grid">
         <ion-item class="etiqueta-item" *ngFor="let etiqueta of etiquetasDisponibles">
-          <ion-label>{{ etiqueta }}</ion-label>
+          <ion-label>{{ t('ETIQUETAS.' + etiqueta) }}</ion-label>
           <ion-checkbox
           slot="end"
           [checked]="filtroEtiquetas.includes(etiqueta)"
@@ -111,7 +112,7 @@
         <p><strong>{{ t('HOME.LABEL') }}: </strong></p>
         <div class="etiquetas-wrapper">
           <span [ngClass]="p.universo === 'Marvel' ? 'marvel-tag' : 'dc-tag'" *ngFor="let tag of (p.etiquetas || '').toString().split(',')">
-            {{ tag.trim() }}
+            {{ t('ETIQUETAS.' + tag.trim()) }}
           </span>
         </div>
       </ion-card-content>
@@ -121,8 +122,10 @@
 
   <!-- Infinite Scroll para toda la pagina -->
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content loadingSpinner="crescent"
-      [loadingText]="t('HOME.LOADING')">
+    <ion-infinite-scroll-content 
+      loadingSpinner="crescent"
+      [loadingText]="t('HOME.LOADING')"
+      [attr.aria-label]="t('HOME.LOADING')"> 
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
@@ -140,7 +143,7 @@
     </ion-button>
 
     <!-- Título -->
-    <h1 class="titulo-seccion">Detalles</h1>
+    <h1 class="titulo-seccion">{{ t('HOME.DETAILS') }}</h1>
 
     <!-- Imagen en alta -->
     <img class="expandido-img" [src]="personajeExpandido.imagen" loading="lazy"/>
@@ -149,13 +152,13 @@
     <h1>{{ personajeExpandido.nombre }}</h1>
 
     <!-- Biografía -->
-    <p><strong>{{ t('HOME.BIBLIOGRAPHY') }}: </strong>{{ personajeExpandido.descripcion }}</p>
+    <p><strong>{{ t('HOME.BIBLIOGRAPHY') }}: </strong>{{ t('BIOGRAFIA.' + personajeExpandido.id) }}</p>
 
     <!-- Poderes (Etiquetas) -->
     <p><strong>{{ t('HOME.POWERS') }}: </strong></p>
     <div class="tags">
-      <span class="tag" *ngFor="let t of personajeExpandido.etiquetas">
-        {{ t }}
+      <span class="tag" *ngFor="let etiq of personajeExpandido.etiquetas">
+        {{ t('ETIQUETAS.' + etiq) }}
       </span>
     </div>
 
@@ -163,7 +166,7 @@
     <p><strong>{{ t('HOME.WEAKNESSES') }}: </strong></p>
     <div class="tags">
       <span class="tag" *ngFor="let d of personajeExpandido.debilidades">
-        {{ d }}
+        {{ t('DEBILIDADES.'+ d) }}
       </span>
     </div>
 
@@ -174,14 +177,14 @@
     <p><strong>{{ t('HOME.UNIVERSE') }}: </strong> {{ personajeExpandido.universo }}</p>
 
     <!-- MÉTRICAS -->
-    <h1 class="titulo-seccion">Métricas</h1>
+    <h1 class="titulo-seccion">{{ t('HOME.METRICS') }}</h1>
 
     <div class="metricas">
 
       <!-- Fuerza -->
       <div class="metrica">
         <div class="metrica-header">
-          <label>Fuerza</label>
+          <label>{{ t('METRICAS.FUERZA') }}</label>
           <span class="valor">{{ personajeExpandido.estadisticasPoder.fuerza }}</span>
         </div>
         <div class="barra">
@@ -195,7 +198,7 @@
       <!-- Velocidad -->
       <div class="metrica">
         <div class="metrica-header">
-          <label>Velocidad</label>
+          <label>{{ t('METRICAS.VELOCIDAD') }}</label>
           <span class="valor">{{ personajeExpandido.estadisticasPoder.velocidad }}</span>
         </div>
         <div class="barra">
@@ -209,7 +212,7 @@
       <!-- Inteligencia -->
       <div class="metrica">
         <div class="metrica-header">
-          <label>Inteligencia</label>
+          <label>{{ t('METRICAS.INTELIGENCIA') }}</label>
           <span class="valor">{{ personajeExpandido.estadisticasPoder.inteligencia }}</span>
         </div>
         <div class="barra">
