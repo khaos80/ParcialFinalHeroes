@@ -14,6 +14,9 @@
   "FONT_MEDIUM": "Medio",
   "FONT_LARGE": "Grande",
   "RESET_DEFAULTS": "Restablecer por defecto",
+  "APP_VERSION": "Versión de la app",
+  "ALL_RIGHTS_RESERVED": "Todos los derechos reservados",
+
 
   "HOME": {
     "TITLE": "Personajes",

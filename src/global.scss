@@ -37,9 +37,10 @@
 @import '@ionic/angular/css/palettes/dark.class.css';
 
 ion-content {
-  padding-top: var(--ion-safe-area-top);
-  padding-bottom: var(--ion-safe-area-bottom);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
+
 
 ion-item {
   --transition: none;

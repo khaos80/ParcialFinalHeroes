@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonList, IonTitle, IonToggle, IonToolbar, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { LanguageService } from '../../services/language.service';
+import { App } from '@capacitor/app';
 
 @Component({
   selector: 'app-ajustes',
@@ -16,10 +17,11 @@ export class AjustesPage implements OnInit {
   paletteToggle = false;
   language: 'es' | 'en' = 'es';
   fontSize: 'small' | 'medium' | 'large' = 'medium';
+  appVersion = '';
 
   constructor(private langService: LanguageService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
   // Tema
   const savedTheme = localStorage.getItem('theme'); // "dark" o "light"
   if (savedTheme) {
@@ -35,6 +37,10 @@ export class AjustesPage implements OnInit {
   const savedSize = localStorage.getItem('fontSize') as 'small' | 'medium' | 'large' | null;
   this.fontSize = savedSize ?? 'medium';
   this.applyFontSize();
+
+  // Versión de la app
+  const info = await App.getInfo();
+  this.appVersion = info.version;
   }
 
   // Función de cambio de Tema entre Light/Dark
