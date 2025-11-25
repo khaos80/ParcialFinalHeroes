@@ -14,6 +14,9 @@
   "FONT_MEDIUM": "Medium",
   "FONT_LARGE": "Large",
   "RESET_DEFAULTS": "Reset to defaults",
+  "APP_VERSION": "App version",
+  "ALL_RIGHTS_RESERVED": "All rights reserved",
+
   
   "HOME": {
     "TITLE": "Characters",
